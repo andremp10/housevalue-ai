@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+# dados brutos (reproduzíveis a partir do ZIP com `python -m ml.inspect_data`)
+data/raw/
+*.zip
+train.csv
+test.csv
+sample_submission.csv
+data_description.txt
+artifacts/reports/ui_screenshots/
+.vercel
+node_modules/

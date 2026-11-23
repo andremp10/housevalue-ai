@@ -1,0 +1,10 @@
+# Dependências de execução (API + inferência). É também o que a Vercel instala.
+# scikit-learn/numpy/pandas/scipy fixados: os .joblib em artifacts/models foram gerados com estas versões.
+fastapi==0.165.0
+pydantic==2.14.4
+joblib==1.6.0
+numpy==2.5.5
+pandas==3.1.1
+scipy==1.18.1
+scikit-learn==1.9.1
+threadpoolctl==3.8.0  # limita threads do OpenMP nas previsões da API

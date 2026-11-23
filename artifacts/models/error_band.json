@@ -1,0 +1,13 @@
+{
+  "level": 0.8,
+  "factor_low": 0.8730486275388674,
+  "factor_high": 1.1500052024067957,
+  "method": "Quantis 10% e 90% de log(real) − log(previsto) em previsões fora da amostra (cross_val_predict, KFold 5, seed 42) na partição de desenvolvimento.",
+  "dev_n": 1168,
+  "dev_within_10pct": 0.6523972602739726,
+  "holdout_n": 292,
+  "holdout_coverage": 0.791095890410959,
+  "holdout_within_10pct": 0.702054794520548,
+  "holdout_within_20pct": 0.886986301369863,
+  "explanation": "Faixa onde o preço real caiu em cerca de 80% das casas nos testes. Estimada sem olhar o holdout e conferida nele depois."
+}

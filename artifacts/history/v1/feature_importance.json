@@ -1,0 +1,216 @@
+{
+  "app": {
+    "model": "HistGradientBoostingRegressor + log1p(y)",
+    "permutation_holdout": {
+      "measure": "aumento médio da RMSLE no holdout ao embaralhar a coluna (20 repetições)",
+      "rows": [
+        {
+          "feature": "GrLivArea",
+          "importance_mean": 0.09254767237828375,
+          "importance_std": 0.005865828810789001
+        },
+        {
+          "feature": "OverallQual",
+          "importance_mean": 0.07942074695683195,
+          "importance_std": 0.006208959804027969
+        },
+        {
+          "feature": "YearBuilt",
+          "importance_mean": 0.03819323045178409,
+          "importance_std": 0.004716746775695954
+        },
+        {
+          "feature": "TotalBsmtSF",
+          "importance_mean": 0.03211744754173096,
+          "importance_std": 0.0018990903811934596
+        },
+        {
+          "feature": "OverallCond",
+          "importance_mean": 0.017141723991624058,
+          "importance_std": 0.003141422049734696
+        },
+        {
+          "feature": "LotArea",
+          "importance_mean": 0.015192990373343424,
+          "importance_std": 0.001588104512212986
+        },
+        {
+          "feature": "GarageCars",
+          "importance_mean": 0.012153281623622628,
+          "importance_std": 0.0023594321847891105
+        },
+        {
+          "feature": "Neighborhood",
+          "importance_mean": 0.010688330670266349,
+          "importance_std": 0.0020755732823547392
+        },
+        {
+          "feature": "Fireplaces",
+          "importance_mean": 0.007992115623976507,
+          "importance_std": 0.0018825979757823637
+        },
+        {
+          "feature": "YearRemodAdd",
+          "importance_mean": 0.00776013437297596,
+          "importance_std": 0.0024416597724635346
+        },
+        {
+          "feature": "CentralAir",
+          "importance_mean": 0.006177437274322133,
+          "importance_std": 0.0005824091209669086
+        },
+        {
+          "feature": "KitchenQual",
+          "importance_mean": 0.0028855926320810314,
+          "importance_std": 0.0007488761935035402
+        },
+        {
+          "feature": "BedroomAbvGr",
+          "importance_mean": 0.0011718972276111516,
+          "importance_std": 0.0006226542879828405
+        },
+        {
+          "feature": "FullBath",
+          "importance_mean": 0.0005907238743691701,
+          "importance_std": 0.00021607484757960523
+        }
+      ]
+    },
+    "native": null
+  },
+  "full": {
+    "model": "HistGradientBoostingRegressor + log1p(y)",
+    "permutation_holdout": {
+      "measure": "aumento médio da RMSLE no holdout ao embaralhar a coluna (10 repetições)",
+      "rows": [
+        {
+          "feature": "GrLivArea",
+          "importance_mean": 0.08647075179139596,
+          "importance_std": 0.005384640780903012
+        },
+        {
+          "feature": "OverallQual",
+          "importance_mean": 0.06357536131075349,
+          "importance_std": 0.005995167349756372
+        },
+        {
+          "feature": "YearBuilt",
+          "importance_mean": 0.01894682160500831,
+          "importance_std": 0.003947788862365386
+        },
+        {
+          "feature": "TotalBsmtSF",
+          "importance_mean": 0.016686501735176863,
+          "importance_std": 0.002078294343371998
+        },
+        {
+          "feature": "OverallCond",
+          "importance_mean": 0.014055355602328044,
+          "importance_std": 0.0024289835992509145
+        },
+        {
+          "feature": "LotArea",
+          "importance_mean": 0.008731467693611406,
+          "importance_std": 0.001207579717385886
+        },
+        {
+          "feature": "YearRemodAdd",
+          "importance_mean": 0.00866149347417447,
+          "importance_std": 0.002408165903958839
+        },
+        {
+          "feature": "BsmtFinSF1",
+          "importance_mean": 0.007533700793956324,
+          "importance_std": 0.0011589891894134502
+        },
+        {
+          "feature": "Fireplaces",
+          "importance_mean": 0.006075088898446932,
+          "importance_std": 0.0019425797044947037
+        },
+        {
+          "feature": "GarageCars",
+          "importance_mean": 0.0048330966706089775,
+          "importance_std": 0.0012743894158885568
+        },
+        {
+          "feature": "CentralAir",
+          "importance_mean": 0.004638648297723538,
+          "importance_std": 0.0004109308146535271
+        },
+        {
+          "feature": "Neighborhood",
+          "importance_mean": 0.004611106975280032,
+          "importance_std": 0.0010120691984573111
+        },
+        {
+          "feature": "SaleCondition",
+          "importance_mean": 0.003842755635535014,
+          "importance_std": 0.0005423443619255848
+        },
+        {
+          "feature": "1stFlrSF",
+          "importance_mean": 0.003261616205667428,
+          "importance_std": 0.0005863312047099195
+        },
+        {
+          "feature": "MSZoning",
+          "importance_mean": 0.0025755674048729056,
+          "importance_std": 0.0006628311829359094
+        },
+        {
+          "feature": "Condition1",
+          "importance_mean": 0.001785880747654553,
+          "importance_std": 0.0004940606504600483
+        },
+        {
+          "feature": "ScreenPorch",
+          "importance_mean": 0.0014726777970842015,
+          "importance_std": 0.0008618748884101821
+        },
+        {
+          "feature": "GarageYrBlt",
+          "importance_mean": 0.0014411637690163708,
+          "importance_std": 0.000839617343021221
+        },
+        {
+          "feature": "YrSold",
+          "importance_mean": 0.0012078424599457822,
+          "importance_std": 0.0012440472007480227
+        },
+        {
+          "feature": "BedroomAbvGr",
+          "importance_mean": 0.0011609287512743677,
+          "importance_std": 0.0006251398349420278
+        },
+        {
+          "feature": "BsmtQual",
+          "importance_mean": 0.0010702215699044475,
+          "importance_std": 0.0005399934109246693
+        },
+        {
+          "feature": "BsmtFullBath",
+          "importance_mean": 0.0010615416966001574,
+          "importance_std": 0.0006544700949943975
+        },
+        {
+          "feature": "BsmtExposure",
+          "importance_mean": 0.00104989268996325,
+          "importance_std": 0.0006660620589244393
+        },
+        {
+          "feature": "GarageArea",
+          "importance_mean": 0.0010318541446506957,
+          "importance_std": 0.0008272917803401373
+        },
+        {
+          "feature": "2ndFlrSF",
+          "importance_mean": 0.0008095499181666437,
+          "importance_std": 0.0006919686293177495
+        }
+      ]
+    },
+    "native": null
+  },
+  "caveat": "Importâncias medem dependência do modelo em relação à variável, não causalidade. Variáveis correlacionadas dividem/mascaram importância."
+}

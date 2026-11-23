@@ -1,0 +1,7 @@
+.venv
+tests
+docs
+data
+__pycache__
+*.docx
+*.md

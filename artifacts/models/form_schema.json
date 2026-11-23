@@ -1,0 +1,409 @@
+{
+  "fields": [
+    {
+      "name": "OverallQual",
+      "api_name": "overall_qual",
+      "label": "Qualidade geral do acabamento",
+      "help": "Avaliação do material e acabamento da casa, de 1 (muito ruim) a 10 (excelente).",
+      "unit": "nota 1–10",
+      "step": 1,
+      "group": "Qualidade",
+      "required": true,
+      "description_dictionary": "Rates the overall material and finish of the house",
+      "type": "integer",
+      "min": 1,
+      "max": 10,
+      "median": 6.0,
+      "p05": 4.0,
+      "p95": 8.0,
+      "range_source": "mínimo e máximo observados na partição de desenvolvimento (o modelo não foi treinado fora dessa faixa)"
+    },
+    {
+      "name": "OverallCond",
+      "api_name": "overall_cond",
+      "label": "Estado de conservação",
+      "help": "Condição geral da casa, de 1 (muito ruim) a 10 (excelente).",
+      "unit": "nota 1–10",
+      "step": 1,
+      "group": "Qualidade",
+      "required": true,
+      "description_dictionary": "Rates the overall condition of the house",
+      "type": "integer",
+      "min": 1,
+      "max": 9,
+      "median": 5.0,
+      "p05": 4.0,
+      "p95": 8.0,
+      "range_source": "mínimo e máximo observados na partição de desenvolvimento (o modelo não foi treinado fora dessa faixa)"
+    },
+    {
+      "name": "GrLivArea",
+      "api_name": "gr_liv_area_m2",
+      "label": "Área construída (sem porão)",
+      "help": "Área habitável acima do nível do solo, sem contar o porão.",
+      "unit": "m²",
+      "step": 1,
+      "group": "Áreas",
+      "required": true,
+      "description_dictionary": "Above grade (ground) living area square feet",
+      "model_unit": "sq ft",
+      "display_factor": 0.09290304,
+      "type": "integer",
+      "min": 334,
+      "max": 5642,
+      "median": 1473.0,
+      "p05": 858.0,
+      "p95": 2464.5999999999995,
+      "range_source": "mínimo e máximo observados na partição de desenvolvimento (o modelo não foi treinado fora dessa faixa)"
+    },
+    {
+      "name": "TotalBsmtSF",
+      "api_name": "total_bsmt_m2",
+      "label": "Área do porão",
+      "help": "Área total do porão. Informe 0 se o imóvel não tem porão (comum nos EUA).",
+      "unit": "m²",
+      "step": 1,
+      "group": "Áreas",
+      "required": true,
+      "description_dictionary": "Total square feet of basement area",
+      "model_unit": "sq ft",
+      "display_factor": 0.09290304,
+      "type": "integer",
+      "min": 0,
+      "max": 6110,
+      "median": 997.5,
+      "p05": 526.05,
+      "p95": 1753.0,
+      "range_source": "mínimo e máximo observados na partição de desenvolvimento (o modelo não foi treinado fora dessa faixa)"
+    },
+    {
+      "name": "LotArea",
+      "api_name": "lot_area_m2",
+      "label": "Área do terreno",
+      "help": "Tamanho total do lote.",
+      "unit": "m²",
+      "step": 1,
+      "group": "Áreas",
+      "required": true,
+      "description_dictionary": "Lot size in square feet",
+      "model_unit": "sq ft",
+      "display_factor": 0.09290304,
+      "type": "integer",
+      "min": 1300,
+      "max": 215245,
+      "median": 9600.0,
+      "p05": 3601.4,
+      "p95": 17473.04999999999,
+      "range_source": "mínimo e máximo observados na partição de desenvolvimento (o modelo não foi treinado fora dessa faixa)"
+    },
+    {
+      "name": "YearBuilt",
+      "api_name": "year_built",
+      "label": "Ano de construção",
+      "help": "Ano original de construção.",
+      "unit": "ano",
+      "step": 1,
+      "group": "Idade",
+      "required": true,
+      "description_dictionary": "Original construction date",
+      "type": "integer",
+      "min": 1872,
+      "max": 2010,
+      "median": 1972.0,
+      "p05": 1915.0,
+      "p95": 2007.0,
+      "range_source": "mínimo e máximo observados na partição de desenvolvimento (o modelo não foi treinado fora dessa faixa)"
+    },
+    {
+      "name": "YearRemodAdd",
+      "api_name": "year_remod_add",
+      "label": "Ano da última reforma",
+      "help": "Ano de reforma/ampliação. Igual ao ano de construção se nunca foi reformado.",
+      "unit": "ano",
+      "step": 1,
+      "group": "Idade",
+      "required": true,
+      "description_dictionary": "Remodel date (same as construction date if no remodeling or additions)",
+      "type": "integer",
+      "min": 1950,
+      "max": 2010,
+      "median": 1994.0,
+      "p05": 1950.0,
+      "p95": 2007.0,
+      "range_source": "mínimo e máximo observados na partição de desenvolvimento (o modelo não foi treinado fora dessa faixa)"
+    },
+    {
+      "name": "FullBath",
+      "api_name": "full_bath",
+      "label": "Banheiros completos",
+      "help": "Banheiros completos acima do nível do solo (não conta o porão).",
+      "unit": "quantidade",
+      "step": 1,
+      "group": "Cômodos",
+      "required": true,
+      "description_dictionary": "Full bathrooms above grade",
+      "type": "integer",
+      "min": 0,
+      "max": 3,
+      "median": 2.0,
+      "p05": 1.0,
+      "p95": 2.0,
+      "range_source": "mínimo e máximo observados na partição de desenvolvimento (o modelo não foi treinado fora dessa faixa)"
+    },
+    {
+      "name": "BedroomAbvGr",
+      "api_name": "bedroom_abv_gr",
+      "label": "Quartos",
+      "help": "Quartos acima do nível do solo (não conta quartos no porão).",
+      "unit": "quantidade",
+      "step": 1,
+      "group": "Cômodos",
+      "required": true,
+      "description_dictionary": "Bedrooms above grade (does NOT include basement bedrooms)",
+      "type": "integer",
+      "min": 0,
+      "max": 8,
+      "median": 3.0,
+      "p05": 2.0,
+      "p95": 4.0,
+      "range_source": "mínimo e máximo observados na partição de desenvolvimento (o modelo não foi treinado fora dessa faixa)"
+    },
+    {
+      "name": "GarageCars",
+      "api_name": "garage_cars",
+      "label": "Vagas na garagem",
+      "help": "Capacidade da garagem em número de carros. Informe 0 se não há garagem.",
+      "unit": "carros",
+      "step": 1,
+      "group": "Cômodos",
+      "required": true,
+      "description_dictionary": "Size of garage in car capacity",
+      "type": "integer",
+      "min": 0,
+      "max": 4,
+      "median": 2.0,
+      "p05": 0.0,
+      "p95": 3.0,
+      "range_source": "mínimo e máximo observados na partição de desenvolvimento (o modelo não foi treinado fora dessa faixa)"
+    },
+    {
+      "name": "Fireplaces",
+      "api_name": "fireplaces",
+      "label": "Lareiras",
+      "help": "Número de lareiras.",
+      "unit": "quantidade",
+      "step": 1,
+      "group": "Cômodos",
+      "required": true,
+      "description_dictionary": "Number of fireplaces",
+      "type": "integer",
+      "min": 0,
+      "max": 3,
+      "median": 1.0,
+      "p05": 0.0,
+      "p95": 2.0,
+      "range_source": "mínimo e máximo observados na partição de desenvolvimento (o modelo não foi treinado fora dessa faixa)"
+    },
+    {
+      "name": "Neighborhood",
+      "api_name": "neighborhood",
+      "label": "Bairro (Ames, Iowa)",
+      "help": "Localização física dentro dos limites da cidade de Ames.",
+      "group": "Localização",
+      "required": true,
+      "description_dictionary": "Physical locations within Ames city limits",
+      "type": "category",
+      "options": [
+        {
+          "value": "Blmngtn",
+          "label": "Bloomington Heights",
+          "n_train": 15
+        },
+        {
+          "value": "Blueste",
+          "label": "Bluestem",
+          "n_train": 1
+        },
+        {
+          "value": "BrDale",
+          "label": "Briardale",
+          "n_train": 13
+        },
+        {
+          "value": "BrkSide",
+          "label": "Brookside",
+          "n_train": 45
+        },
+        {
+          "value": "ClearCr",
+          "label": "Clear Creek",
+          "n_train": 19
+        },
+        {
+          "value": "CollgCr",
+          "label": "College Creek",
+          "n_train": 115
+        },
+        {
+          "value": "Crawfor",
+          "label": "Crawford",
+          "n_train": 44
+        },
+        {
+          "value": "Edwards",
+          "label": "Edwards",
+          "n_train": 87
+        },
+        {
+          "value": "Gilbert",
+          "label": "Gilbert",
+          "n_train": 65
+        },
+        {
+          "value": "IDOTRR",
+          "label": "Iowa DOT and Rail Road",
+          "n_train": 26
+        },
+        {
+          "value": "MeadowV",
+          "label": "Meadow Village",
+          "n_train": 10
+        },
+        {
+          "value": "Mitchel",
+          "label": "Mitchell",
+          "n_train": 40
+        },
+        {
+          "value": "NAmes",
+          "label": "North Ames",
+          "n_train": 181
+        },
+        {
+          "value": "NPkVill",
+          "label": "Northpark Villa",
+          "n_train": 7
+        },
+        {
+          "value": "NWAmes",
+          "label": "Northwest Ames",
+          "n_train": 66
+        },
+        {
+          "value": "NoRidge",
+          "label": "Northridge",
+          "n_train": 33
+        },
+        {
+          "value": "NridgHt",
+          "label": "Northridge Heights",
+          "n_train": 61
+        },
+        {
+          "value": "OldTown",
+          "label": "Old Town",
+          "n_train": 91
+        },
+        {
+          "value": "SWISU",
+          "label": "South & West of Iowa State University",
+          "n_train": 21
+        },
+        {
+          "value": "Sawyer",
+          "label": "Sawyer",
+          "n_train": 58
+        },
+        {
+          "value": "SawyerW",
+          "label": "Sawyer West",
+          "n_train": 44
+        },
+        {
+          "value": "Somerst",
+          "label": "Somerset",
+          "n_train": 69
+        },
+        {
+          "value": "StoneBr",
+          "label": "Stone Brook",
+          "n_train": 20
+        },
+        {
+          "value": "Timber",
+          "label": "Timberland",
+          "n_train": 28
+        },
+        {
+          "value": "Veenker",
+          "label": "Veenker",
+          "n_train": 9
+        }
+      ],
+      "range_source": "categorias observadas na partição de desenvolvimento"
+    },
+    {
+      "name": "KitchenQual",
+      "api_name": "kitchen_qual",
+      "label": "Qualidade da cozinha",
+      "help": "Qualidade da cozinha segundo o dicionário de dados.",
+      "group": "Qualidade",
+      "required": true,
+      "description_dictionary": "Kitchen quality",
+      "type": "category",
+      "options": [
+        {
+          "value": "Ex",
+          "label": "Excelente",
+          "n_train": 77
+        },
+        {
+          "value": "Fa",
+          "label": "Regular",
+          "n_train": 32
+        },
+        {
+          "value": "Gd",
+          "label": "Bom",
+          "n_train": 470
+        },
+        {
+          "value": "TA",
+          "label": "Típico/médio",
+          "n_train": 589
+        }
+      ],
+      "range_source": "categorias observadas na partição de desenvolvimento"
+    },
+    {
+      "name": "CentralAir",
+      "api_name": "central_air",
+      "label": "Ar-condicionado central",
+      "help": "Se o imóvel possui ar-condicionado central.",
+      "group": "Qualidade",
+      "required": true,
+      "description_dictionary": "Central air conditioning",
+      "type": "category",
+      "options": [
+        {
+          "value": "N",
+          "label": "Não",
+          "n_train": 83
+        },
+        {
+          "value": "Y",
+          "label": "Sim",
+          "n_train": 1085
+        }
+      ],
+      "range_source": "categorias observadas na partição de desenvolvimento"
+    }
+  ],
+  "cross_field_rules": [
+    {
+      "rule": "YearRemodAdd >= YearBuilt",
+      "message": "O ano da reforma não pode ser anterior ao ano de construção.",
+      "violations_in_train": 0
+    }
+  ]
+}

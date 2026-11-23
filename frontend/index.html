@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HouseValue AI</title>
+  <meta name="description" content="Modelo de Machine Learning que estima preços de casas vendidas em Ames, Iowa (EUA), 2006 a 2010, comparado com os preços reais de venda. Projeto acadêmico.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%23137f7a%22/%3E%3Cpath d=%22M7 16 16 8.5l9 7.5v8.5H7z%22 fill=%22none%22 stroke=%22white%22 stroke-width=%222.4%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
+  <script>
+    try { const t = localStorage.getItem("hv.theme"); if (t) document.documentElement.dataset.theme = t; } catch {}
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/vendor/plotly-2.35.2.min.js" defer></script>
+  <script type="module" src="assets/js/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#content">Pular para o conteúdo</a>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-sun" viewBox="0 0 20 20"><circle cx="10" cy="10" r="3.4"/><path d="M10 2.5v2M10 15.5v2M2.5 10h2M15.5 10h2M4.7 4.7l1.4 1.4M13.9 13.9l1.4 1.4M4.7 15.3l1.4-1.4M13.9 6.1l1.4-1.4"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 20 20"><path d="M15.5 12.6A6.2 6.2 0 0 1 7.4 4.5a6.2 6.2 0 1 0 8.1 8.1z"/></symbol>
+      <symbol id="i-dice" viewBox="0 0 20 20"><rect x="3.5" y="3.5" width="13" height="13" rx="2.5"/><circle cx="7.3" cy="7.3" r=".9" class="fill"/><circle cx="12.7" cy="12.7" r=".9" class="fill"/><circle cx="12.7" cy="7.3" r=".9" class="fill"/><circle cx="7.3" cy="12.7" r=".9" class="fill"/></symbol>
+      <symbol id="i-reset" viewBox="0 0 20 20"><path d="M4 10a6 6 0 1 0 1.8-4.3"/><path d="M4 3.5v3.2h3.2"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 20 20"><path d="M7.5 3.5h5l-.8 4.3 2.8 2.7H5.5l2.8-2.7z"/><path d="M10 10.5V17"/></symbol>
+      <symbol id="i-chev" viewBox="0 0 20 20"><path d="m6 8 4 4 4-4"/></symbol>
+      <symbol id="i-search" viewBox="0 0 20 20"><circle cx="9" cy="9" r="5"/><path d="m13 13 3.5 3.5"/></symbol>
+      <symbol id="i-api" viewBox="0 0 20 20"><path d="m7 6-4 4 4 4M13 6l4 4-4 4"/></symbol>
+      <symbol id="i-play" viewBox="0 0 20 20"><path d="M6.5 4.5v11l9-5.5z"/></symbol>
+    </defs>
+  </svg>
+
+  <div class="app">
+    <header class="topbar">
+      <div class="topbar__brand">
+        <span class="appicon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M7 16 16 8.5l9 7.5v8.5H7z"/></svg></span>
+        <div>
+          <span class="topbar__name">HouseValue AI</span>
+          <span class="topbar__ctx">Casas vendidas em Ames, Iowa (EUA), 2006 a 2010 · preços em dólares da época</span>
+        </div>
+      </div>
+      <nav class="tabs" role="tablist" aria-label="Seções">
+        <button role="tab" id="tab-predict" aria-controls="predict" aria-selected="true"><span class="tab-long">Simular um imóvel</span><span class="tab-short">Simular</span></button>
+        <button role="tab" id="tab-real" aria-controls="real" aria-selected="false" tabindex="-1"><span class="tab-long">Imóveis reais</span><span class="tab-short">Reais</span></button>
+        <button role="tab" id="tab-how" aria-controls="how" aria-selected="false" tabindex="-1"><span class="tab-long">Como o modelo funciona</span><span class="tab-short">Como funciona</span></button>
+      </nav>
+      <div class="topbar__tools">
+        <a class="tbtn" href="/docs" target="_blank" rel="noopener" title="Documentação técnica da API (abre em nova aba)"><svg class="ic" aria-hidden="true"><use href="#i-api"/></svg><span>API</span></a>
+        <button class="tbtn" id="theme-toggle" type="button" aria-label="Alternar tema claro ou escuro" title="Alternar tema">
+          <svg class="ic ic-sun" aria-hidden="true"><use href="#i-sun"/></svg><svg class="ic ic-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="content" class="content" tabindex="-1">
+      <!-- ======================================================== SIMULADOR -->
+      <section id="predict" role="tabpanel" aria-labelledby="tab-predict" class="view">
+        <div class="hero">
+          <div>
+            <h1>Simular um imóvel</h1>
+            <p class="hero__sub">Descreva uma casa e veja quanto o modelo estima. Abaixo, ela é comparada com casas parecidas que foram vendidas de verdade.</p>
+          </div>
+          <div class="toolbar" role="toolbar" aria-label="Ações do simulador">
+            <button class="btn" type="button" id="btn-typical" title="Volta ao imóvel típico da base (medianas e categorias mais frequentes)"><svg class="ic" aria-hidden="true"><use href="#i-reset"/></svg>Imóvel típico</button>
+            <button class="btn" type="button" id="btn-sample" title="Carrega uma casa que foi vendida de verdade, com o preço da venda"><svg class="ic" aria-hidden="true"><use href="#i-dice"/></svg>Sortear casa vendida</button>
+            <label class="switch" title="Recalcula a cada alteração">
+              <input type="checkbox" role="switch" id="live-toggle" checked>
+              <span class="switch__track" aria-hidden="true"><span class="switch__thumb"></span></span>
+              <span>Ao vivo</span>
+            </label>
+          </div>
+        </div>
+
+        <div id="form-state" class="loading-panel" aria-live="polite"><div class="skeleton skeleton--sm"></div><div class="skeleton"></div></div>
+
+        <div class="sim" id="sim" hidden>
+          <form class="panel sim__inputs" id="predict-form" novalidate>
+            <div class="origin" id="origin" aria-live="polite"></div>
+            <div id="form-groups"></div>
+            <div class="sim__submit" id="manual-submit" hidden>
+              <button type="submit" class="btn btn--primary" id="submit-btn"><span class="btn__label">Estimar preço</span><span class="spinner" aria-hidden="true"></span></button>
+            </div>
+          </form>
+
+          <aside class="sim__result" aria-label="Resultado">
+            <div class="panel result" id="result">
+              <div class="progress" aria-hidden="true"></div>
+              <div class="result__head">
+                <span class="result__label"><span class="key key--model"></span>Estimativa do modelo</span>
+                <span class="live-dot" id="live-dot"><span></span>ao vivo</span>
+              </div>
+              <p class="result__value" aria-live="polite" aria-atomic="true"><span class="ccy">US$</span><span id="result-value">–</span></p>
+              <p class="result__range" id="result-range"></p>
+              <p class="result__caption">Estimativa experimental · Ames, Iowa · vendas de 2006 a 2010</p>
+              <div id="result-compare" class="result__compare"></div>
+              <div id="result-error" class="alert alert--error" role="alert" hidden></div>
+              <div class="strip">
+                <div class="strip__head"><span>Posição entre os preços de venda da base</span><span id="strip-pct" class="mono"></span></div>
+                <svg class="strip__svg" id="strip-svg" viewBox="0 0 400 64" role="img" aria-labelledby="strip-desc"></svg>
+                <p class="strip__desc" id="strip-desc"></p>
+              </div>
+              <p class="result__warn" id="result-warn" hidden></p>
+            </div>
+
+            <div class="panel" id="panel-similar">
+              <h2 class="panel__title">Casas parecidas que foram vendidas</h2>
+              <p class="fine"><span class="key key--real"></span>Real: preço da venda · <span class="key key--model"></span>Modelo: estimativa para a mesma casa. Clique numa linha para vê-la na comparação completa.</p>
+              <div id="similar-list"></div>
+            </div>
+          </aside>
+        </div>
+
+        <section class="panel cmpx" id="cmp-similar" hidden aria-labelledby="cmpx-title">
+          <div class="panel__bar">
+            <h2 class="panel__title" id="cmpx-title">Sua casa × casas reais vendidas</h2>
+            <span class="fine"><span class="key key--real"></span>Real (venda) <span class="key key--model"></span>Modelo (estimativa)</span>
+          </div>
+          <p class="fine" id="cmpx-intro"></p>
+          <div class="table-wrap"><table class="cmpx__table" id="cmpx-table"></table></div>
+          <p class="cmpx__summary" id="cmpx-summary"></p>
+        </section>
+
+        <details class="more" id="more" open>
+          <summary>Explorar o modelo: sensibilidade, algoritmos lado a lado e cenários</summary>
+          <div class="more__grid">
+            <div class="panel sens" id="panel-sens">
+              <div class="sens__head">
+                <h2>Como o preço reage</h2>
+                <div class="select">
+                  <label class="visually-hidden" for="sens-field">Característica a variar</label>
+                  <select id="sens-field"></select>
+                  <svg class="ic" aria-hidden="true"><use href="#i-chev"/></svg>
+                </div>
+              </div>
+              <div class="chart chart--sens" id="chart-sens" role="img" aria-label="Como a estimativa muda ao variar uma característica"></div>
+              <p class="fine" id="sens-note"></p>
+            </div>
+            <div class="panel" id="panel-algos">
+              <div class="sens__head"><h2>Algoritmos lado a lado</h2><span class="badge">mesma casa</span></div>
+              <div class="chart chart--algos" id="chart-algos" role="img" aria-label="Estimativa de cada algoritmo para a casa atual"></div>
+              <p class="fine" id="algos-note">Carregando as estimativas de cada algoritmo…</p>
+            </div>
+            <div class="panel scen" id="panel-scen">
+              <div class="scen__head">
+                <h2>Comparar cenários</h2>
+                <button class="btn btn--sm" type="button" id="btn-pin"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg><span>Fixar como A</span></button>
+              </div>
+              <div id="scen-body"></div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- ======================================================== IMÓVEIS REAIS -->
+      <section id="real" role="tabpanel" aria-labelledby="tab-real" class="view" hidden>
+        <div class="hero">
+          <div>
+            <h1>O modelo contra os preços reais</h1>
+            <p class="hero__sub">Casas que foram vendidas de verdade e que o modelo nunca viu no treino. Para cada uma, o modelo estima o preço e comparamos com o valor pelo qual ela foi vendida.</p>
+          </div>
+          <button class="btn" type="button" id="btn-run"><svg class="ic ic-play" aria-hidden="true"><use href="#i-play"/></svg><span class="btn__label">Rodar o modelo de novo</span><span class="spinner" aria-hidden="true"></span></button>
+        </div>
+
+        <div id="real-state" class="loading-panel" aria-live="polite"><div class="skeleton skeleton--sm"></div><div class="skeleton skeleton--lg"></div></div>
+
+        <div id="real-body" hidden>
+          <div class="stats" id="real-stats"></div>
+          <p class="fine run-info" id="run-info"></p>
+          <p class="visually-hidden" id="real-live" aria-live="polite"></p>
+
+          <div class="real-layout">
+            <div class="real-layout__main">
+              <section class="panel">
+                <div class="panel__bar">
+                  <h2 class="panel__title">Preço real × estimativa do modelo</h2>
+                  <span class="fine">Clique num ponto para ver a casa</span>
+                </div>
+                <p class="fine">Cada ponto é uma casa. Na linha tracejada, o modelo acertaria em cheio; a faixa clara marca ±10%.</p>
+                <div class="chart chart--real" id="chart-real" role="img" aria-label="Preço real de cada casa pela estimativa do modelo"></div>
+              </section>
+
+              <section class="panel">
+                <div class="panel__bar">
+                  <h2 class="panel__title">Todas as casas <span class="badge" id="real-count"></span></h2>
+                  <div class="filters">
+                    <label class="search"><svg class="ic" aria-hidden="true"><use href="#i-search"/></svg><span class="visually-hidden">Buscar bairro ou Id</span><input type="search" id="f-search" placeholder="Bairro ou Id"></label>
+                    <div class="select"><label class="visually-hidden" for="f-result">Filtrar pelo resultado</label>
+                      <select id="f-result">
+                        <option value="all">Todas</option>
+                        <option value="good">Perto do real (erro até 10%)</option>
+                        <option value="ok">Erro moderado (10% a 20%)</option>
+                        <option value="bad">Erro grande (mais de 20%)</option>
+                      </select><svg class="ic" aria-hidden="true"><use href="#i-chev"/></svg></div>
+                    <div class="select"><label class="visually-hidden" for="f-sort">Ordenar</label>
+                      <select id="f-sort">
+                        <option value="err-desc">Maior erro primeiro</option>
+                        <option value="err-asc">Menor erro primeiro</option>
+                        <option value="price-desc">Mais caras primeiro</option>
+                        <option value="price-asc">Mais baratas primeiro</option>
+                      </select><svg class="ic" aria-hidden="true"><use href="#i-chev"/></svg></div>
+                  </div>
+                </div>
+                <div class="table-wrap table-wrap--scroll"><table class="table table--click" id="real-table" aria-label="Casas vendidas: preço real e estimativa do modelo"></table></div>
+              </section>
+            </div>
+
+            <section class="panel detail" id="detail" aria-label="Casa selecionada">
+              <p class="fine">Selecione uma casa no gráfico ou na tabela.</p>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================== COMO FUNCIONA -->
+      <section id="how" role="tabpanel" aria-labelledby="tab-how" class="view" hidden>
+        <div class="hero">
+          <div>
+            <h1>Como o modelo funciona</h1>
+            <p class="hero__sub">O que ele aprendeu, como foi testado, onde acerta e onde erra.</p>
+          </div>
+        </div>
+        <div id="how-state" class="loading-panel"><div class="skeleton skeleton--lg"></div></div>
+        <div id="how-body" class="stack" hidden>
+          <section class="panel"><ol class="story" id="story"></ol></section>
+
+          <div class="grid-2">
+            <section class="panel">
+              <h2 class="panel__title">O que mais pesa no preço</h2>
+              <p class="fine">Quanto o erro do modelo aumenta quando a característica é embaralhada entre as casas. Quanto maior a barra, mais o modelo depende dela.</p>
+              <div class="chart chart--perm" id="chart-perm" role="img" aria-label="Importância das características"></div>
+            </section>
+            <section class="panel">
+              <h2 class="panel__title">Onde o modelo erra</h2>
+              <p class="fine" id="bias-desc"></p>
+              <div class="chart chart--perm" id="chart-bias" role="img" aria-label="Erro médio do modelo por faixa de preço"></div>
+            </section>
+          </div>
+
+          <section class="panel">
+            <h2 class="panel__title">Por que este algoritmo?</h2>
+            <p class="fine" id="algo-desc"></p>
+            <div class="chart" id="chart-algo-mae" role="img" aria-label="Erro médio de cada algoritmo nas casas de teste"></div>
+          </section>
+
+          <details class="more" id="more-tech">
+            <summary>Detalhes técnicos (protocolo de Machine Learning)</summary>
+            <div class="more__body">
+              <section class="panel">
+                <h2 class="panel__title">Protocolo</h2>
+                <ol class="steps" id="protocol"></ol>
+              </section>
+              <section class="panel">
+                <h2 class="panel__title">Avaliação final nas casas de teste (holdout)</h2>
+                <div class="table-wrap"><table class="table" id="holdout-table"></table></div>
+              </section>
+              <section class="panel" id="panel-v1v2">
+                <h2 class="panel__title">Versão 1 × versão 2 do modelo</h2>
+                <p class="fine" id="v1v2-note"></p>
+                <div class="table-wrap"><table class="table" id="v1v2-table"></table></div>
+              </section>
+              <section class="panel">
+                <div class="panel__bar">
+                  <h2 class="panel__title">Validação cruzada (5 partes)</h2>
+                  <div class="seg seg--sm" role="radiogroup" aria-label="Conjunto de características">
+                    <label><input type="radio" name="feature-set" value="app" checked><span>14 características</span></label>
+                    <label><input type="radio" name="feature-set" value="full"><span>79 características</span></label>
+                  </div>
+                </div>
+                <p class="fine" id="set-desc"></p>
+                <div class="table-wrap"><table class="table" id="cv-table"></table></div>
+              </section>
+              <div class="grid-2">
+                <section class="panel">
+                  <h2 class="panel__title">Vencedor ou empate? <span class="badge" id="tie-verdict"></span></h2>
+                  <p class="fine" id="tie-desc"></p>
+                  <div class="chart chart--tie" id="chart-tie" role="img" aria-label="Erro de cada partição para os dois melhores modelos"></div>
+                </section>
+                <section class="panel">
+                  <h2 class="panel__title">Curva de aprendizado</h2>
+                  <p class="fine" id="lc-desc"></p>
+                  <div class="chart" id="chart-lc" role="img" aria-label="Erro conforme a quantidade de casas no treino"></div>
+                </section>
+                <section class="panel">
+                  <h2 class="panel__title">Distribuição dos preços</h2>
+                  <p class="fine">Poucas casas muito caras deixam a distribuição torta; em escala logarítmica ela fica quase simétrica, por isso o modelo aprende o logaritmo do preço.</p>
+                  <div class="chart" id="chart-hist" role="img" aria-label="Histograma dos preços de venda"></div>
+                </section>
+                <section class="panel">
+                  <h2 class="panel__title">Área construída × preço</h2>
+                  <p class="fine">Cada ponto é uma casa da base. Em destaque, as maiores de 370 m².</p>
+                  <div class="chart" id="chart-scatter" role="img" aria-label="Área construída por preço de venda"></div>
+                </section>
+              </div>
+              <section class="panel">
+                <h2 class="panel__title">Erro por tipo de venda e por bairro</h2>
+                <div class="grid-2 grid-2--tight">
+                  <div class="table-wrap"><table class="table" id="seg-sale"></table></div>
+                  <div class="table-wrap"><table class="table" id="seg-nbhd"></table></div>
+                </div>
+              </section>
+              <section class="panel prose">
+                <h2>Limitações</h2>
+                <ul>
+                  <li>Base de uma única cidade dos EUA, vendas de 2006 a 2010, em dólares da época: não vale para o Brasil nem para preços atuais.</li>
+                  <li>Não é laudo de avaliação. A faixa de erro mostrada é empírica (medida nos testes), não uma garantia.</li>
+                  <li>As áreas aparecem em m², mas o modelo foi treinado com os dados originais em pés quadrados; a conversão é exata e automática.</li>
+                  <li>Casas atípicas (muito grandes, vendas parciais ou entre parentes) concentram os maiores erros.</li>
+                </ul>
+              </section>
+            </div>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <footer class="statusbar" aria-label="Barra de status">
+      <span class="sb-item" id="sb-api"><span class="dot"></span><span>Conectando…</span></span>
+      <span class="sb-item" id="sb-model"></span>
+      <span class="sb-spacer"></span>
+      <span class="sb-item" id="sb-latency"></span>
+    </footer>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

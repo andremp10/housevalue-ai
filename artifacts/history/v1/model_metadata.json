@@ -1,0 +1,157 @@
+{
+  "model_name": "HistGradientBoostingRegressor",
+  "model_config": "HistGradientBoostingRegressor + log1p(y)",
+  "log_target": true,
+  "hyperparameters": {
+    "learning_rate": 0.03,
+    "max_leaf_nodes": 7
+  },
+  "model_version": "1.0.0",
+  "trained_at": "2026-11-22T23:16:33+00:00",
+  "artifact": "artifacts/models/house_price_pipeline.joblib",
+  "artifact_sha256": "46ecfc0dc6d786551b00fc0e5231634cbb11d477b6a4ec085c4a73e489a9acfc",
+  "source_file": "train.csv",
+  "source_sha256": "1e18addf81e5e4d347cc17ee6075bbe4a42b7fa26b9e5b063e8f692a5f929d41",
+  "source_zip": {
+    "file_name": "house-prices-advanced-regression-techniques.zip",
+    "location": "user Downloads folder",
+    "size_bytes": 203809,
+    "sha256": "65f769a9157a2581671957ed08da8a8162d53e67b4e9970ee856b634deb11d9f"
+  },
+  "target": "SalePrice",
+  "currency": "USD",
+  "dataset_context": "Ames, Iowa (EUA) — vendas históricas de 2006 a 2010",
+  "input_features": [
+    "OverallQual",
+    "OverallCond",
+    "GrLivArea",
+    "TotalBsmtSF",
+    "LotArea",
+    "YearBuilt",
+    "YearRemodAdd",
+    "FullBath",
+    "BedroomAbvGr",
+    "GarageCars",
+    "Fireplaces",
+    "Neighborhood",
+    "KitchenQual",
+    "CentralAir"
+  ],
+  "input_api_names": {
+    "OverallQual": "overall_qual",
+    "OverallCond": "overall_cond",
+    "GrLivArea": "gr_liv_area",
+    "TotalBsmtSF": "total_bsmt_sf",
+    "LotArea": "lot_area",
+    "YearBuilt": "year_built",
+    "YearRemodAdd": "year_remod_add",
+    "FullBath": "full_bath",
+    "BedroomAbvGr": "bedroom_abv_gr",
+    "GarageCars": "garage_cars",
+    "Fireplaces": "fireplaces",
+    "Neighborhood": "neighborhood",
+    "KitchenQual": "kitchen_qual",
+    "CentralAir": "central_air"
+  },
+  "numeric_features": [
+    "OverallQual",
+    "OverallCond",
+    "GrLivArea",
+    "TotalBsmtSF",
+    "LotArea",
+    "YearBuilt",
+    "YearRemodAdd",
+    "FullBath",
+    "BedroomAbvGr",
+    "GarageCars",
+    "Fireplaces"
+  ],
+  "categorical_features": [
+    "Neighborhood",
+    "KitchenQual",
+    "CentralAir"
+  ],
+  "preprocessing": [
+    "StructuralNAFiller: NA estrutural → 'None' (regra fixa do dicionário; no conjunto app não há colunas com NA estrutural)",
+    "Numéricas: SimpleImputer(median, add_indicator=True)",
+    "Categóricas: SimpleImputer(most_frequent) + OneHotEncoder(handle_unknown='ignore')",
+    "Alvo: TransformedTargetRegressor(log1p / expm1) — previsão devolvida em USD"
+  ],
+  "training_data": "partição de desenvolvimento (1168 linhas)",
+  "validation": {
+    "split": "80% desenvolvimento / 20% holdout, train_test_split(shuffle=True, random_state=42)",
+    "cv": "KFold(n_splits=5, shuffle=True, random_state=42) — mesmos folds para todos",
+    "tuning": "GridSearchCV nos mesmos folds, apenas no desenvolvimento (refit pela RMSLE)",
+    "primary_metric": "RMSLE (desempate: MAE em USD)",
+    "metrics_scale": "USD (escala original), inclusive para modelos treinados em log1p(y)",
+    "note_on_cv_optimism": "As métricas de CV do melhor hiperparâmetro são levemente otimistas (seleção nos mesmos folds); o holdout é a estimativa independente.",
+    "random_split_justification": "Estimativa de generalização para imóveis da mesma população (Ames, 2006–2010). Não é uma avaliação de previsão futura."
+  },
+  "random_state": 42,
+  "cv_metrics": {
+    "rmsle": {
+      "mean": 0.1371518373233785,
+      "std": 0.0073138972367770404
+    },
+    "mae": {
+      "mean": 17202.56167215232,
+      "std": 620.4883351943231
+    },
+    "rmse": {
+      "mean": 28704.44055441281,
+      "std": 3329.0210849838013
+    },
+    "r2": {
+      "mean": 0.8614849568761855,
+      "std": 0.019546029060734812
+    }
+  },
+  "train_metrics_in_cv": {
+    "rmsle": 0.09390497916880138,
+    "mae": 11955.516563711983,
+    "rmse": 19209.258384650173,
+    "r2": 0.9381121707096108
+  },
+  "holdout_metrics": {
+    "rmsle": 0.13904777165504958,
+    "mae": 16668.000624266748,
+    "rmse": 28228.062884933388,
+    "r2": 0.8961160825873185
+  },
+  "full_feature_reference": {
+    "config": "HistGradientBoostingRegressor + log1p(y)",
+    "cv_metrics": {
+      "rmsle": 0.126765177426914,
+      "mae": 15467.09180653509,
+      "rmse": 26253.315157846606,
+      "r2": 0.8837450499971728
+    },
+    "holdout_metrics": {
+      "rmsle": 0.13633594362280033,
+      "mae": 16548.48132749915,
+      "rmse": 29536.713057332247,
+      "r2": 0.8862607150379442
+    }
+  },
+  "library_versions": {
+    "python": "3.13.3",
+    "scikit-learn": "1.9.1",
+    "pandas": "3.1.1",
+    "numpy": "2.5.5",
+    "joblib": "1.6.0"
+  },
+  "holdout_n": 292,
+  "baseline_holdout_metrics": {
+    "rmsle": 0.43228311331265407,
+    "mae": 59568.25,
+    "rmse": 88667.16750592619,
+    "r2": -0.024971608920279387
+  },
+  "beats_baseline_holdout": {
+    "rmsle": true,
+    "mae": true,
+    "rmse": true,
+    "r2": true
+  },
+  "evaluated_at": "2026-11-22T23:34:03+00:00"
+}

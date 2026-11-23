@@ -1,0 +1,101 @@
+{
+  "zip_discovery": {
+    "searched": [
+      "workspace:C:\\Users\\ozile\\OneDrive\\Área de Trabalho\\SIG_ML",
+      "downloads:C:\\Users\\ozile\\Downloads"
+    ],
+    "candidates": [
+      "C:\\Users\\ozile\\Downloads\\house-prices-advanced-regression-techniques.zip"
+    ],
+    "selected": "C:\\Users\\ozile\\Downloads\\house-prices-advanced-regression-techniques.zip",
+    "decision": "Nenhum ZIP no workspace; ZIP com a base House Prices encontrado em Downloads. O workspace contém os arquivos já extraídos (verificados por SHA-256)."
+  },
+  "zip": {
+    "file_name": "house-prices-advanced-regression-techniques.zip",
+    "location": "user Downloads folder",
+    "size_bytes": 203809,
+    "sha256": "65f769a9157a2581671957ed08da8a8162d53e67b4e9970ee856b634deb11d9f"
+  },
+  "zip_members": [
+    {
+      "name": "data_description.txt",
+      "size_bytes": 13370,
+      "compressed_bytes": 4446,
+      "sha256": "356a4670aa688afa8ba44b1365b633fbbac2dae535fe4638532630607d64070d"
+    },
+    {
+      "name": "sample_submission.csv",
+      "size_bytes": 31939,
+      "compressed_bytes": 15648,
+      "sha256": "f19e99699b925aa3085c8d2ae43c62f15fbcd35e4a953b98025f8392c3ffa807"
+    },
+    {
+      "name": "test.csv",
+      "size_bytes": 451405,
+      "compressed_bytes": 87058,
+      "sha256": "8fdd3d829d4d986b58f845c9553b225e67dd8383624d90fb6ca1d4bed5798c1e"
+    },
+    {
+      "name": "train.csv",
+      "size_bytes": 460676,
+      "compressed_bytes": 96055,
+      "sha256": "1e18addf81e5e4d347cc17ee6075bbe4a42b7fa26b9e5b063e8f692a5f929d41"
+    }
+  ],
+  "workspace_extracted_files": [
+    {
+      "name": "train.csv",
+      "size_bytes": 460676,
+      "sha256": "1e18addf81e5e4d347cc17ee6075bbe4a42b7fa26b9e5b063e8f692a5f929d41",
+      "identical_to_zip_member": true
+    },
+    {
+      "name": "test.csv",
+      "size_bytes": 451405,
+      "sha256": "8fdd3d829d4d986b58f845c9553b225e67dd8383624d90fb6ca1d4bed5798c1e",
+      "identical_to_zip_member": true
+    },
+    {
+      "name": "data_description.txt",
+      "size_bytes": 13370,
+      "sha256": "356a4670aa688afa8ba44b1365b633fbbac2dae535fe4638532630607d64070d",
+      "identical_to_zip_member": true
+    },
+    {
+      "name": "sample_submission.csv",
+      "size_bytes": 31939,
+      "sha256": "f19e99699b925aa3085c8d2ae43c62f15fbcd35e4a953b98025f8392c3ffa807",
+      "identical_to_zip_member": true
+    }
+  ],
+  "working_copy": [
+    {
+      "name": "train.csv",
+      "path": "data/raw/train.csv",
+      "origin": "zip",
+      "sha256": "1e18addf81e5e4d347cc17ee6075bbe4a42b7fa26b9e5b063e8f692a5f929d41",
+      "action": "kept_existing_identical"
+    },
+    {
+      "name": "test.csv",
+      "path": "data/raw/test.csv",
+      "origin": "zip",
+      "sha256": "8fdd3d829d4d986b58f845c9553b225e67dd8383624d90fb6ca1d4bed5798c1e",
+      "action": "kept_existing_identical"
+    },
+    {
+      "name": "data_description.txt",
+      "path": "data/raw/data_description.txt",
+      "origin": "zip",
+      "sha256": "356a4670aa688afa8ba44b1365b633fbbac2dae535fe4638532630607d64070d",
+      "action": "kept_existing_identical"
+    },
+    {
+      "name": "sample_submission.csv",
+      "path": "data/raw/sample_submission.csv",
+      "origin": "zip",
+      "sha256": "f19e99699b925aa3085c8d2ae43c62f15fbcd35e4a953b98025f8392c3ffa807",
+      "action": "kept_existing_identical"
+    }
+  ]
+}

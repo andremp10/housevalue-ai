@@ -1,0 +1,6 @@
+# Pipeline de ML offline, testes e servidor local (além de requirements.txt)
+-r requirements.txt
+matplotlib>=3.8
+uvicorn[standard]>=0.30
+httpx>=0.27
+pytest>=8.0

@@ -1,0 +1,247 @@
+{
+  "method": "Cada característica embaralhada 20 vezes nas 292 casas de teste; médias das repetições. Modelo salvo, sem retreino.",
+  "baseline": {
+    "median_ape_pct": 6.074674560848077,
+    "within_10pct": 70.2054794520548
+  },
+  "rows": [
+    {
+      "feature": "GrLivArea",
+      "median_ape_pct": 13.687037925108987,
+      "within_10pct": 38.37328767123288
+    },
+    {
+      "feature": "OverallQual",
+      "median_ape_pct": 10.830246762156468,
+      "within_10pct": 46.74657534246575
+    },
+    {
+      "feature": "TotalBsmtSF",
+      "median_ape_pct": 8.986294790662148,
+      "within_10pct": 54.8972602739726
+    },
+    {
+      "feature": "Neighborhood",
+      "median_ape_pct": 8.449048067162831,
+      "within_10pct": 57.106164383561634
+    },
+    {
+      "feature": "LotArea",
+      "median_ape_pct": 7.764009586152808,
+      "within_10pct": 60.102739726027394
+    },
+    {
+      "feature": "YearBuilt",
+      "median_ape_pct": 7.523574155433488,
+      "within_10pct": 61.21575342465754
+    },
+    {
+      "feature": "GarageCars",
+      "median_ape_pct": 7.366043766722821,
+      "within_10pct": 64.57191780821918
+    },
+    {
+      "feature": "OverallCond",
+      "median_ape_pct": 7.307390706633939,
+      "within_10pct": 62.79109589041095
+    },
+    {
+      "feature": "KitchenQual",
+      "median_ape_pct": 6.62077248922017,
+      "within_10pct": 67.51712328767124
+    },
+    {
+      "feature": "YearRemodAdd",
+      "median_ape_pct": 6.56008608583804,
+      "within_10pct": 68.08219178082192
+    },
+    {
+      "feature": "BedroomAbvGr",
+      "median_ape_pct": 6.483325987016651,
+      "within_10pct": 68.73287671232876
+    },
+    {
+      "feature": "Fireplaces",
+      "median_ape_pct": 6.201014154160606,
+      "within_10pct": 68.32191780821918
+    },
+    {
+      "feature": "CentralAir",
+      "median_ape_pct": 6.125123384464055,
+      "within_10pct": 69.52054794520546
+    },
+    {
+      "feature": "FullBath",
+      "median_ape_pct": 6.004797912805847,
+      "within_10pct": 69.88013698630137
+    }
+  ],
+  "typical_house": {
+    "OverallQual": 6.0,
+    "OverallCond": 5.0,
+    "GrLivArea": 1473.0,
+    "TotalBsmtSF": 997.5,
+    "LotArea": 9600.0,
+    "YearBuilt": 1972.0,
+    "YearRemodAdd": 1994.0,
+    "FullBath": 2.0,
+    "BedroomAbvGr": 3.0,
+    "GarageCars": 2.0,
+    "Fireplaces": 1.0,
+    "Neighborhood": "NAmes",
+    "KitchenQual": "TA",
+    "CentralAir": "Y"
+  },
+  "typical_house_by_neighborhood": [
+    {
+      "neighborhood": "Edwards",
+      "label": "Edwards",
+      "n_train": 87,
+      "pred": 155523.82229741322
+    },
+    {
+      "neighborhood": "OldTown",
+      "label": "Old Town",
+      "n_train": 91,
+      "pred": 155595.37711521887
+    },
+    {
+      "neighborhood": "Sawyer",
+      "label": "Sawyer",
+      "n_train": 58,
+      "pred": 158580.36861194318
+    },
+    {
+      "neighborhood": "NAmes",
+      "label": "North Ames",
+      "n_train": 181,
+      "pred": 159580.69641100467
+    },
+    {
+      "neighborhood": "MeadowV",
+      "label": "Meadow Village",
+      "n_train": 10,
+      "pred": 161029.0852079747
+    },
+    {
+      "neighborhood": "BrDale",
+      "label": "Briardale",
+      "n_train": 13,
+      "pred": 161156.95331547724
+    },
+    {
+      "neighborhood": "Mitchel",
+      "label": "Mitchell",
+      "n_train": 40,
+      "pred": 161666.96285297
+    },
+    {
+      "neighborhood": "NWAmes",
+      "label": "Northwest Ames",
+      "n_train": 66,
+      "pred": 163136.45415922394
+    },
+    {
+      "neighborhood": "IDOTRR",
+      "label": "Iowa DOT and Rail Road",
+      "n_train": 26,
+      "pred": 164359.01190492976
+    },
+    {
+      "neighborhood": "SawyerW",
+      "label": "Sawyer West",
+      "n_train": 44,
+      "pred": 167818.39337033994
+    },
+    {
+      "neighborhood": "SWISU",
+      "label": "South & West of Iowa State University",
+      "n_train": 21,
+      "pred": 171945.35339069806
+    },
+    {
+      "neighborhood": "BrkSide",
+      "label": "Brookside",
+      "n_train": 45,
+      "pred": 171981.4140837496
+    },
+    {
+      "neighborhood": "Gilbert",
+      "label": "Gilbert",
+      "n_train": 65,
+      "pred": 174383.07750226362
+    },
+    {
+      "neighborhood": "Blmngtn",
+      "label": "Bloomington Heights",
+      "n_train": 15,
+      "pred": 174472.7910418236
+    },
+    {
+      "neighborhood": "CollgCr",
+      "label": "College Creek",
+      "n_train": 115,
+      "pred": 174750.00428117954
+    },
+    {
+      "neighborhood": "Timber",
+      "label": "Timberland",
+      "n_train": 28,
+      "pred": 178129.08048032408
+    },
+    {
+      "neighborhood": "NridgHt",
+      "label": "Northridge Heights",
+      "n_train": 61,
+      "pred": 178816.74427683436
+    },
+    {
+      "neighborhood": "Blueste",
+      "label": "Bluestem",
+      "n_train": 1,
+      "pred": 178992.03253688957
+    },
+    {
+      "neighborhood": "NPkVill",
+      "label": "Northpark Villa",
+      "n_train": 7,
+      "pred": 178992.03253688957
+    },
+    {
+      "neighborhood": "Veenker",
+      "label": "Veenker",
+      "n_train": 9,
+      "pred": 178992.03253688957
+    },
+    {
+      "neighborhood": "NoRidge",
+      "label": "Northridge",
+      "n_train": 33,
+      "pred": 181284.34852671257
+    },
+    {
+      "neighborhood": "ClearCr",
+      "label": "Clear Creek",
+      "n_train": 19,
+      "pred": 183284.02452208064
+    },
+    {
+      "neighborhood": "Crawfor",
+      "label": "Crawford",
+      "n_train": 44,
+      "pred": 186350.51088034533
+    },
+    {
+      "neighborhood": "Somerst",
+      "label": "Somerset",
+      "n_train": 69,
+      "pred": 192307.06925527108
+    },
+    {
+      "neighborhood": "StoneBr",
+      "label": "Stone Brook",
+      "n_train": 20,
+      "pred": 202658.76528207716
+    }
+  ]
+}

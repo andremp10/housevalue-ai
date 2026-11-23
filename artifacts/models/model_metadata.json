@@ -1,0 +1,250 @@
+{
+  "model_name": "HistGradientBoostingRegressor (nativo, monotônico)",
+  "model_config": "HistGradientBoostingRegressor (nativo, monotônico) + log1p(y)",
+  "log_target": true,
+  "hyperparameters": {
+    "learning_rate": 0.03,
+    "max_leaf_nodes": 15
+  },
+  "model_version": "2.0.0",
+  "trained_at": "2026-11-23T00:34:27+00:00",
+  "artifact": "artifacts/models/house_price_pipeline.joblib",
+  "artifact_sha256": "e75046fbc0f03cc16e1b5aa4a145d6a455a85d6082fbd3c036468bb708372eb5",
+  "source_file": "train.csv",
+  "source_sha256": "1e18addf81e5e4d347cc17ee6075bbe4a42b7fa26b9e5b063e8f692a5f929d41",
+  "source_zip": {
+    "file_name": "house-prices-advanced-regression-techniques.zip",
+    "location": "user Downloads folder",
+    "size_bytes": 203809,
+    "sha256": "65f769a9157a2581671957ed08da8a8162d53e67b4e9970ee856b634deb11d9f"
+  },
+  "target": "SalePrice",
+  "currency": "USD",
+  "dataset_context": "Ames, Iowa (EUA) — vendas históricas de 2006 a 2010",
+  "input_features": [
+    "OverallQual",
+    "OverallCond",
+    "GrLivArea",
+    "TotalBsmtSF",
+    "LotArea",
+    "YearBuilt",
+    "YearRemodAdd",
+    "FullBath",
+    "BedroomAbvGr",
+    "GarageCars",
+    "Fireplaces",
+    "Neighborhood",
+    "KitchenQual",
+    "CentralAir"
+  ],
+  "input_api_names": {
+    "OverallQual": "overall_qual",
+    "OverallCond": "overall_cond",
+    "GrLivArea": "gr_liv_area_m2",
+    "TotalBsmtSF": "total_bsmt_m2",
+    "LotArea": "lot_area_m2",
+    "YearBuilt": "year_built",
+    "YearRemodAdd": "year_remod_add",
+    "FullBath": "full_bath",
+    "BedroomAbvGr": "bedroom_abv_gr",
+    "GarageCars": "garage_cars",
+    "Fireplaces": "fireplaces",
+    "Neighborhood": "neighborhood",
+    "KitchenQual": "kitchen_qual",
+    "CentralAir": "central_air"
+  },
+  "numeric_features": [
+    "OverallQual",
+    "OverallCond",
+    "GrLivArea",
+    "TotalBsmtSF",
+    "LotArea",
+    "YearBuilt",
+    "YearRemodAdd",
+    "FullBath",
+    "BedroomAbvGr",
+    "GarageCars",
+    "Fireplaces"
+  ],
+  "categorical_features": [
+    "Neighborhood",
+    "KitchenQual",
+    "CentralAir"
+  ],
+  "preprocessing": [
+    "StructuralNAFiller: NA estrutural → 'None' (regra fixa do dicionário; no conjunto app não há colunas com NA estrutural)",
+    "Numéricas: sem transformação (o HistGradientBoosting trata ausentes nativamente)",
+    "Categóricas: OrdinalEncoder (desconhecida/ausente → NaN) + categorical_features nativo do HGB",
+    "Restrições monotônicas crescentes: OverallQual, OverallCond, GrLivArea, TotalBsmtSF, LotArea, GarageCars, Fireplaces, FullBath",
+    "Alvo: TransformedTargetRegressor(log1p / expm1) — previsão devolvida em USD"
+  ],
+  "training_data": "partição de desenvolvimento (1168 linhas)",
+  "validation": {
+    "split": "80% desenvolvimento / 20% holdout, train_test_split(shuffle=True, random_state=42)",
+    "cv": "KFold(n_splits=5, shuffle=True, random_state=42) — mesmos folds para todos",
+    "tuning": "GridSearchCV nos mesmos folds, apenas no desenvolvimento (refit pela RMSLE)",
+    "primary_metric": "RMSLE (desempate: MAE em USD)",
+    "metrics_scale": "USD (escala original), inclusive para modelos treinados em log1p(y)",
+    "note_on_cv_optimism": "As métricas de CV do melhor hiperparâmetro são levemente otimistas (seleção nos mesmos folds); o holdout é a estimativa independente.",
+    "random_split_justification": "Estimativa de generalização para imóveis da mesma população (Ames, 2006–2010). Não é uma avaliação de previsão futura."
+  },
+  "random_state": 42,
+  "cv_metrics": {
+    "rmsle": {
+      "mean": 0.13247554801300648,
+      "std": 0.0067578110502834994
+    },
+    "mae": {
+      "mean": 16746.57575867079,
+      "std": 687.0534059683873
+    },
+    "rmse": {
+      "mean": 26278.56304045888,
+      "std": 2781.460788675103
+    },
+    "r2": {
+      "mean": 0.8839153950982247,
+      "std": 0.014290042972625273
+    }
+  },
+  "train_metrics_in_cv": {
+    "rmsle": 0.07862170404504834,
+    "mae": 10008.197432721041,
+    "rmse": 15687.652398464901,
+    "r2": 0.9587231059287588
+  },
+  "holdout_metrics": {
+    "rmsle": 0.13672402056787092,
+    "mae": 16298.065682783908,
+    "rmse": 26765.90777756484,
+    "r2": 0.906599302323567
+  },
+  "full_feature_reference": {
+    "config": "HistGradientBoostingRegressor (nativo, monotônico) + log1p(y)",
+    "cv_metrics": {
+      "rmsle": 0.12444429400887136,
+      "mae": 15314.84614854938,
+      "rmse": 25153.281992148863,
+      "r2": 0.8937236109283736
+    },
+    "holdout_metrics": {
+      "rmsle": 0.13338183372809626,
+      "mae": 15499.127210289003,
+      "rmse": 26968.016521443522,
+      "r2": 0.9051834439036774
+    }
+  },
+  "candidates": [
+    {
+      "config": "DummyRegressor",
+      "algorithm": "DummyRegressor",
+      "slug": "dummyregressor",
+      "file": "candidates/dummyregressor.joblib",
+      "sha256": "bd8e994122cff85a8c81759a5cb369bc99871eb2bb3cce5367835e464d104476",
+      "cv_rmsle_mean": 0.39068193557713427,
+      "is_selected": false,
+      "is_baseline": true
+    },
+    {
+      "config": "Ridge",
+      "algorithm": "Ridge",
+      "slug": "ridge",
+      "file": "candidates/ridge.joblib",
+      "sha256": "299c35e003c32def8a5c0df49961013d8d3bb15402afbac7da38d05e532a196e",
+      "cv_rmsle_mean": 0.17551173491286048,
+      "is_selected": false,
+      "is_baseline": false
+    },
+    {
+      "config": "Ridge + log1p(y)",
+      "algorithm": "Ridge",
+      "slug": "ridge_log1p_y",
+      "file": "candidates/ridge_log1p_y.joblib",
+      "sha256": "e95898b21289628e6881839d0e2b5dfbe495bbe73ce9abf782213763e01d0625",
+      "cv_rmsle_mean": 0.14817078967573868,
+      "is_selected": false,
+      "is_baseline": false
+    },
+    {
+      "config": "RandomForestRegressor",
+      "algorithm": "RandomForestRegressor",
+      "slug": "randomforestregressor",
+      "file": "candidates/randomforestregressor.joblib",
+      "sha256": "ebac9e67ac64d10596697fbe96968391c02e65fb7d1a41dcaf488d49725bc1e0",
+      "cv_rmsle_mean": 0.14136806815229047,
+      "is_selected": false,
+      "is_baseline": false
+    },
+    {
+      "config": "RandomForestRegressor + log1p(y)",
+      "algorithm": "RandomForestRegressor",
+      "slug": "randomforestregressor_log1p_y",
+      "file": "candidates/randomforestregressor_log1p_y.joblib",
+      "sha256": "6847f6ba12bd1e2089c73e0c0d6e44266b165d32476b97cd84e93c874be7a1fe",
+      "cv_rmsle_mean": 0.1377664643870961,
+      "is_selected": false,
+      "is_baseline": false
+    },
+    {
+      "config": "HistGradientBoostingRegressor",
+      "algorithm": "HistGradientBoostingRegressor",
+      "slug": "histgradientboostingregressor",
+      "file": "candidates/histgradientboostingregressor.joblib",
+      "sha256": "83f9d190d692a8f76ec69e5acc2acf9e4fc4a07201729e2ae8691bea9f9775ed",
+      "cv_rmsle_mean": 0.1380562175291883,
+      "is_selected": false,
+      "is_baseline": false
+    },
+    {
+      "config": "HistGradientBoostingRegressor + log1p(y)",
+      "algorithm": "HistGradientBoostingRegressor",
+      "slug": "histgradientboostingregressor_log1p_y",
+      "file": "candidates/histgradientboostingregressor_log1p_y.joblib",
+      "sha256": "46ecfc0dc6d786551b00fc0e5231634cbb11d477b6a4ec085c4a73e489a9acfc",
+      "cv_rmsle_mean": 0.1371518373233785,
+      "is_selected": false,
+      "is_baseline": false
+    },
+    {
+      "config": "HistGradientBoostingRegressor (categorias nativas) + log1p(y)",
+      "algorithm": "HistGradientBoostingRegressor (categorias nativas)",
+      "slug": "histgradientboostingregressor_categorias_nativas_log1p_y",
+      "file": "candidates/histgradientboostingregressor_categorias_nativas_log1p_y.joblib",
+      "sha256": "9d93110766776f9775d4603f23c3bb489fb354c4f76d3b7de72abb51e3880a86",
+      "cv_rmsle_mean": 0.13360058518541204,
+      "is_selected": false,
+      "is_baseline": false
+    },
+    {
+      "config": "HistGradientBoostingRegressor (nativo, monotônico) + log1p(y)",
+      "algorithm": "HistGradientBoostingRegressor (nativo, monotônico)",
+      "slug": "histgradientboostingregressor_nativo_monotonico_log1p_y",
+      "file": "candidates/histgradientboostingregressor_nativo_monotonico_log1p_y.joblib",
+      "sha256": "e75046fbc0f03cc16e1b5aa4a145d6a455a85d6082fbd3c036468bb708372eb5",
+      "cv_rmsle_mean": 0.13247554801300648,
+      "is_selected": true,
+      "is_baseline": false
+    }
+  ],
+  "library_versions": {
+    "python": "3.13.3",
+    "scikit-learn": "1.9.1",
+    "pandas": "3.1.1",
+    "numpy": "2.5.5",
+    "joblib": "1.6.0"
+  },
+  "holdout_n": 292,
+  "baseline_holdout_metrics": {
+    "rmsle": 0.43228311331265407,
+    "mae": 59568.25,
+    "rmse": 88667.16750592619,
+    "r2": -0.024971608920279387
+  },
+  "beats_baseline_holdout": {
+    "rmsle": true,
+    "mae": true,
+    "rmse": true,
+    "r2": true
+  },
+  "evaluated_at": "2026-11-23T00:36:14+00:00"
+}

@@ -1,0 +1,942 @@
+{
+  "generated_at": "2026-11-22T23:16:33+00:00",
+  "protocol": {
+    "split": "80% desenvolvimento / 20% holdout, train_test_split(shuffle=True, random_state=42)",
+    "cv": "KFold(n_splits=5, shuffle=True, random_state=42) — mesmos folds para todos",
+    "tuning": "GridSearchCV nos mesmos folds, apenas no desenvolvimento (refit pela RMSLE)",
+    "primary_metric": "RMSLE (desempate: MAE em USD)",
+    "metrics_scale": "USD (escala original), inclusive para modelos treinados em log1p(y)",
+    "note_on_cv_optimism": "As métricas de CV do melhor hiperparâmetro são levemente otimistas (seleção nos mesmos folds); o holdout é a estimativa independente.",
+    "random_split_justification": "Estimativa de generalização para imóveis da mesma população (Ames, 2006–2010). Não é uma avaliação de previsão futura."
+  },
+  "feature_sets": {
+    "full": {
+      "features": [
+        "MSSubClass",
+        "MSZoning",
+        "LotFrontage",
+        "LotArea",
+        "Street",
+        "Alley",
+        "LotShape",
+        "LandContour",
+        "Utilities",
+        "LotConfig",
+        "LandSlope",
+        "Neighborhood",
+        "Condition1",
+        "Condition2",
+        "BldgType",
+        "HouseStyle",
+        "OverallQual",
+        "OverallCond",
+        "YearBuilt",
+        "YearRemodAdd",
+        "RoofStyle",
+        "RoofMatl",
+        "Exterior1st",
+        "Exterior2nd",
+        "MasVnrType",
+        "MasVnrArea",
+        "ExterQual",
+        "ExterCond",
+        "Foundation",
+        "BsmtQual",
+        "BsmtCond",
+        "BsmtExposure",
+        "BsmtFinType1",
+        "BsmtFinSF1",
+        "BsmtFinType2",
+        "BsmtFinSF2",
+        "BsmtUnfSF",
+        "TotalBsmtSF",
+        "Heating",
+        "HeatingQC",
+        "CentralAir",
+        "Electrical",
+        "1stFlrSF",
+        "2ndFlrSF",
+        "LowQualFinSF",
+        "GrLivArea",
+        "BsmtFullBath",
+        "BsmtHalfBath",
+        "FullBath",
+        "HalfBath",
+        "BedroomAbvGr",
+        "KitchenAbvGr",
+        "KitchenQual",
+        "TotRmsAbvGrd",
+        "Functional",
+        "Fireplaces",
+        "FireplaceQu",
+        "GarageType",
+        "GarageYrBlt",
+        "GarageFinish",
+        "GarageCars",
+        "GarageArea",
+        "GarageQual",
+        "GarageCond",
+        "PavedDrive",
+        "WoodDeckSF",
+        "OpenPorchSF",
+        "EnclosedPorch",
+        "3SsnPorch",
+        "ScreenPorch",
+        "PoolArea",
+        "PoolQC",
+        "Fence",
+        "MiscFeature",
+        "MiscVal",
+        "MoSold",
+        "YrSold",
+        "SaleType",
+        "SaleCondition"
+      ],
+      "numeric_features": [
+        "LotFrontage",
+        "LotArea",
+        "OverallQual",
+        "OverallCond",
+        "YearBuilt",
+        "YearRemodAdd",
+        "MasVnrArea",
+        "BsmtFinSF1",
+        "BsmtFinSF2",
+        "BsmtUnfSF",
+        "TotalBsmtSF",
+        "1stFlrSF",
+        "2ndFlrSF",
+        "LowQualFinSF",
+        "GrLivArea",
+        "BsmtFullBath",
+        "BsmtHalfBath",
+        "FullBath",
+        "HalfBath",
+        "BedroomAbvGr",
+        "KitchenAbvGr",
+        "TotRmsAbvGrd",
+        "Fireplaces",
+        "GarageYrBlt",
+        "GarageCars",
+        "GarageArea",
+        "WoodDeckSF",
+        "OpenPorchSF",
+        "EnclosedPorch",
+        "3SsnPorch",
+        "ScreenPorch",
+        "PoolArea",
+        "MiscVal",
+        "MoSold",
+        "YrSold"
+      ],
+      "categorical_features": [
+        "MSSubClass",
+        "MSZoning",
+        "Street",
+        "Alley",
+        "LotShape",
+        "LandContour",
+        "Utilities",
+        "LotConfig",
+        "LandSlope",
+        "Neighborhood",
+        "Condition1",
+        "Condition2",
+        "BldgType",
+        "HouseStyle",
+        "RoofStyle",
+        "RoofMatl",
+        "Exterior1st",
+        "Exterior2nd",
+        "MasVnrType",
+        "ExterQual",
+        "ExterCond",
+        "Foundation",
+        "BsmtQual",
+        "BsmtCond",
+        "BsmtExposure",
+        "BsmtFinType1",
+        "BsmtFinType2",
+        "Heating",
+        "HeatingQC",
+        "CentralAir",
+        "Electrical",
+        "KitchenQual",
+        "Functional",
+        "FireplaceQu",
+        "GarageType",
+        "GarageFinish",
+        "GarageQual",
+        "GarageCond",
+        "PavedDrive",
+        "PoolQC",
+        "Fence",
+        "MiscFeature",
+        "SaleType",
+        "SaleCondition"
+      ],
+      "results": [
+        {
+          "config": "DummyRegressor",
+          "algorithm": "DummyRegressor",
+          "log_target": false,
+          "best_params": {},
+          "n_param_combinations": 1,
+          "fit_seconds": 0.48,
+          "cv_rmsle_mean": 0.39068193557713427,
+          "cv_rmsle_std": 0.01276610813142772,
+          "train_rmsle_mean": 0.3908225647769549,
+          "cv_rmsle_folds": [
+            0.3989221401509141,
+            0.3934324730714769,
+            0.36542925482015365,
+            0.3978430975915963,
+            0.39778271225153017
+          ],
+          "cv_mae_mean": 54573.17375738234,
+          "cv_mae_std": 1029.8451007571564,
+          "train_mae_mean": 54546.56631428277,
+          "cv_mae_folds": [
+            54917.22649572649,
+            54511.27777777778,
+            52633.068376068375,
+            55547.57081545064,
+            55256.725321888414
+          ],
+          "cv_rmse_mean": 78871.64030637864,
+          "cv_rmse_std": 4397.149094172212,
+          "train_rmse_mean": 78972.35862272636,
+          "cv_rmse_folds": [
+            80172.79966441184,
+            76434.47699316028,
+            71735.54521087056,
+            81610.52206670411,
+            84404.8575967464
+          ],
+          "cv_r2_mean": -0.046436421122634686,
+          "cv_r2_std": 0.009637228611488805,
+          "train_r2_mean": -0.045826433084415544,
+          "cv_r2_folds": [
+            -0.04561305894319401,
+            -0.06434917587766575,
+            -0.0371157334313561,
+            -0.03896148644844777,
+            -0.0461426509125098
+          ]
+        },
+        {
+          "config": "Ridge",
+          "algorithm": "Ridge",
+          "log_target": false,
+          "best_params": {
+            "alpha": 1000
+          },
+          "n_param_combinations": 9,
+          "fit_seconds": 7.03,
+          "cv_rmsle_mean": 0.15727714513709912,
+          "cv_rmsle_std": 0.013804593237553928,
+          "train_rmsle_mean": 0.14787451858793077,
+          "cv_rmsle_folds": [
+            0.15595801334036458,
+            0.144711928953453,
+            0.14087850021924633,
+            0.17815291666043548,
+            0.16668436651199614
+          ],
+          "cv_mae_mean": 20823.66362586269,
+          "cv_mae_std": 1300.5110817674008,
+          "train_mae_mean": 20012.564204978185,
+          "cv_mae_folds": [
+            20695.743736033597,
+            19702.445625205117,
+            19132.431811536273,
+            22293.936528047052,
+            22293.760428491405
+          ],
+          "cv_rmse_mean": 36953.2803633368,
+          "cv_rmse_std": 7801.0749594066765,
+          "train_rmse_mean": 34381.434182399564,
+          "cv_rmse_folds": [
+            36307.214259622946,
+            29244.719128624125,
+            27909.081405836543,
+            48028.343093094656,
+            43277.04392950577
+          ],
+          "cv_r2_mean": 0.7675818577222067,
+          "cv_r2_std": 0.07737253931226519,
+          "train_r2_mean": 0.8014902469926886,
+          "cv_r2_folds": [
+            0.7855615024615945,
+            0.8441881654297995,
+            0.8430181290682148,
+            0.640165876610904,
+            0.7249756150405209
+          ]
+        },
+        {
+          "config": "Ridge + log1p(y)",
+          "algorithm": "Ridge",
+          "log_target": true,
+          "best_params": {
+            "alpha": 30
+          },
+          "n_param_combinations": 9,
+          "fit_seconds": 7.5,
+          "cv_rmsle_mean": 0.15193845527686536,
+          "cv_rmsle_std": 0.030556708379377698,
+          "train_rmsle_mean": 0.11168684769033968,
+          "cv_rmsle_folds": [
+            0.14786574928652996,
+            0.12968467495049665,
+            0.11709656905143064,
+            0.20567434263598214,
+            0.15937094045988748
+          ],
+          "cv_mae_mean": 17749.550799462613,
+          "cv_mae_std": 2856.67468420183,
+          "train_mae_mean": 13868.576814077964,
+          "cv_mae_folds": [
+            16495.89679670501,
+            16826.273687657424,
+            14594.507533217731,
+            23081.020015909093,
+            17750.055963823812
+          ],
+          "cv_rmse_mean": 48661.15951567418,
+          "cv_rmse_std": 35237.006404572385,
+          "train_rmse_mean": 24789.291951516338,
+          "cv_rmse_folds": [
+            41723.83437424748,
+            23621.740820479074,
+            21051.868158462377,
+            117155.6846333609,
+            39752.669591821075
+          ],
+          "cv_r2_mean": 0.4305386623153694,
+          "cv_r2_std": 0.7893253864724273,
+          "train_r2_mean": 0.8968190112641679,
+          "cv_r2_folds": [
+            0.7168051671481563,
+            0.8983448625496593,
+            0.9106818541749607,
+            -1.1410848049008142,
+            0.7679462326048851
+          ]
+        },
+        {
+          "config": "RandomForestRegressor",
+          "algorithm": "RandomForestRegressor",
+          "log_target": false,
+          "best_params": {
+            "max_features": 0.33,
+            "min_samples_leaf": 1
+          },
+          "n_param_combinations": 6,
+          "fit_seconds": 21.46,
+          "cv_rmsle_mean": 0.1432218225757575,
+          "cv_rmsle_std": 0.010861613667388938,
+          "train_rmsle_mean": 0.058662827495385275,
+          "cv_rmsle_folds": [
+            0.15280069164061813,
+            0.14194663245006942,
+            0.12420938682713167,
+            0.15480841429446912,
+            0.14234398766649917
+          ],
+          "cv_mae_mean": 17053.757259173668,
+          "cv_mae_std": 877.0878078467724,
+          "train_mae_mean": 6357.983426116562,
+          "cv_mae_folds": [
+            17035.85690883191,
+            15870.23801994302,
+            16341.341467236467,
+            17779.961158798284,
+            18241.388741058654
+          ],
+          "cv_rmse_mean": 29492.124156322767,
+          "cv_rmse_std": 4718.454905719499,
+          "train_rmse_mean": 11041.056359568847,
+          "cv_rmse_folds": [
+            32479.465188850903,
+            24122.77213677423,
+            23393.824005398983,
+            34189.35340817249,
+            33275.20604241724
+          ],
+          "cv_r2_mean": 0.8534298706512974,
+          "cv_r2_std": 0.032012084320479466,
+          "train_r2_mean": 0.9795589109419984,
+          "cv_r2_folds": [
+            0.8283931425357133,
+            0.8939867958688384,
+            0.8897037231847269,
+            0.817657077295432,
+            0.837408614371776
+          ]
+        },
+        {
+          "config": "RandomForestRegressor + log1p(y)",
+          "algorithm": "RandomForestRegressor",
+          "log_target": true,
+          "best_params": {
+            "max_features": 0.33,
+            "min_samples_leaf": 1
+          },
+          "n_param_combinations": 6,
+          "fit_seconds": 24.22,
+          "cv_rmsle_mean": 0.1383676425097728,
+          "cv_rmsle_std": 0.010901533048344614,
+          "train_rmsle_mean": 0.052299111250061966,
+          "cv_rmsle_folds": [
+            0.1503702533059657,
+            0.13938618792523724,
+            0.11884452524943799,
+            0.14645738098592398,
+            0.13677986508229897
+          ],
+          "cv_mae_mean": 16881.234735047,
+          "cv_mae_std": 914.2175157612836,
+          "train_mae_mean": 6436.848473177679,
+          "cv_mae_folds": [
+            17449.169956451216,
+            15554.315958236346,
+            16013.387130052173,
+            17596.52998876535,
+            17792.77064172993
+          ],
+          "cv_rmse_mean": 29926.258438821154,
+          "cv_rmse_std": 5036.697792052422,
+          "train_rmse_mean": 11746.146438285918,
+          "cv_rmse_folds": [
+            33324.98005698301,
+            25296.040562638933,
+            22713.71569762679,
+            32390.477193183837,
+            35906.07868367319
+          ],
+          "cv_r2_mean": 0.8491623294337465,
+          "cv_r2_std": 0.03436334187450976,
+          "train_r2_mean": 0.9768605269943261,
+          "cv_r2_folds": [
+            0.8193422088980828,
+            0.8834236026876418,
+            0.8960235975475319,
+            0.8363402703797302,
+            0.8106819676557456
+          ]
+        },
+        {
+          "config": "HistGradientBoostingRegressor",
+          "algorithm": "HistGradientBoostingRegressor",
+          "log_target": false,
+          "best_params": {
+            "learning_rate": 0.1,
+            "max_leaf_nodes": 7
+          },
+          "n_param_combinations": 6,
+          "fit_seconds": 320.8,
+          "cv_rmsle_mean": 0.13031065852870433,
+          "cv_rmsle_std": 0.006548307522936751,
+          "train_rmsle_mean": 0.04305794032351029,
+          "cv_rmsle_folds": [
+            0.1368701476718692,
+            0.12663771514103164,
+            0.12037754642981989,
+            0.13798065615533253,
+            0.12968722724546836
+          ],
+          "cv_mae_mean": 16088.575020248687,
+          "cv_mae_std": 607.3965616560167,
+          "train_mae_mean": 4393.882403891777,
+          "cv_mae_folds": [
+            15963.487111724671,
+            16115.527669621011,
+            15037.405732061698,
+            16485.925091878064,
+            16840.529495957984
+          ],
+          "cv_rmse_mean": 26965.59828829171,
+          "cv_rmse_std": 4132.8921691686255,
+          "train_rmse_mean": 6131.863219854122,
+          "cv_rmse_folds": [
+            28793.803156072077,
+            23526.142162343207,
+            21102.733345184053,
+            28711.751432286932,
+            32693.56134557229
+          ],
+          "cv_r2_mean": 0.8777986397848565,
+          "cv_r2_std": 0.02416180960319811,
+          "train_r2_mean": 0.9936893563122284,
+          "cv_r2_folds": [
+            0.8651301227800849,
+            0.8991660069300736,
+            0.9102497145933143,
+            0.8714042819662896,
+            0.8430430726545204
+          ]
+        },
+        {
+          "config": "HistGradientBoostingRegressor + log1p(y)",
+          "algorithm": "HistGradientBoostingRegressor",
+          "log_target": true,
+          "best_params": {
+            "learning_rate": 0.1,
+            "max_leaf_nodes": 7
+          },
+          "n_param_combinations": 6,
+          "fit_seconds": 439.14,
+          "cv_rmsle_mean": 0.126765177426914,
+          "cv_rmsle_std": 0.00510752423705896,
+          "train_rmsle_mean": 0.03646183398603918,
+          "cv_rmsle_folds": [
+            0.12613870391906576,
+            0.12519607382467526,
+            0.11919935700972399,
+            0.1350145097831383,
+            0.12827724259796675
+          ],
+          "cv_mae_mean": 15467.09180653509,
+          "cv_mae_std": 721.7389558907236,
+          "train_mae_mean": 4450.303803252115,
+          "cv_mae_folds": [
+            14875.890053558207,
+            14870.307111905804,
+            14891.376243116762,
+            16271.182552349881,
+            16426.7030717448
+          ],
+          "cv_rmse_mean": 26253.315157846606,
+          "cv_rmse_std": 4661.211961868201,
+          "train_rmse_mean": 6647.409635708287,
+          "cv_rmse_folds": [
+            25647.11256634527,
+            21848.24670982656,
+            21011.155718030714,
+            29280.539832654387,
+            33479.520962376075
+          ],
+          "cv_r2_mean": 0.8837450499971728,
+          "cv_r2_std": 0.02942900958365372,
+          "train_r2_mean": 0.9925759357650865,
+          "cv_r2_folds": [
+            0.8929975170740121,
+            0.9130361588365941,
+            0.9110269868221853,
+            0.8662587754123059,
+            0.8354058118407666
+          ]
+        }
+      ],
+      "selected": "HistGradientBoostingRegressor + log1p(y)",
+      "baseline": "DummyRegressor",
+      "selected_beats_baseline_cv": {
+        "rmsle": true,
+        "mae": true,
+        "rmse": true,
+        "r2": true
+      }
+    },
+    "app": {
+      "features": [
+        "OverallQual",
+        "OverallCond",
+        "GrLivArea",
+        "TotalBsmtSF",
+        "LotArea",
+        "YearBuilt",
+        "YearRemodAdd",
+        "FullBath",
+        "BedroomAbvGr",
+        "GarageCars",
+        "Fireplaces",
+        "Neighborhood",
+        "KitchenQual",
+        "CentralAir"
+      ],
+      "numeric_features": [
+        "OverallQual",
+        "OverallCond",
+        "GrLivArea",
+        "TotalBsmtSF",
+        "LotArea",
+        "YearBuilt",
+        "YearRemodAdd",
+        "FullBath",
+        "BedroomAbvGr",
+        "GarageCars",
+        "Fireplaces"
+      ],
+      "categorical_features": [
+        "Neighborhood",
+        "KitchenQual",
+        "CentralAir"
+      ],
+      "results": [
+        {
+          "config": "DummyRegressor",
+          "algorithm": "DummyRegressor",
+          "log_target": false,
+          "best_params": {},
+          "n_param_combinations": 1,
+          "fit_seconds": 0.24,
+          "cv_rmsle_mean": 0.39068193557713427,
+          "cv_rmsle_std": 0.01276610813142772,
+          "train_rmsle_mean": 0.3908225647769549,
+          "cv_rmsle_folds": [
+            0.3989221401509141,
+            0.3934324730714769,
+            0.36542925482015365,
+            0.3978430975915963,
+            0.39778271225153017
+          ],
+          "cv_mae_mean": 54573.17375738234,
+          "cv_mae_std": 1029.8451007571564,
+          "train_mae_mean": 54546.56631428277,
+          "cv_mae_folds": [
+            54917.22649572649,
+            54511.27777777778,
+            52633.068376068375,
+            55547.57081545064,
+            55256.725321888414
+          ],
+          "cv_rmse_mean": 78871.64030637864,
+          "cv_rmse_std": 4397.149094172212,
+          "train_rmse_mean": 78972.35862272636,
+          "cv_rmse_folds": [
+            80172.79966441184,
+            76434.47699316028,
+            71735.54521087056,
+            81610.52206670411,
+            84404.8575967464
+          ],
+          "cv_r2_mean": -0.046436421122634686,
+          "cv_r2_std": 0.009637228611488805,
+          "train_r2_mean": -0.045826433084415544,
+          "cv_r2_folds": [
+            -0.04561305894319401,
+            -0.06434917587766575,
+            -0.0371157334313561,
+            -0.03896148644844777,
+            -0.0461426509125098
+          ]
+        },
+        {
+          "config": "Ridge",
+          "algorithm": "Ridge",
+          "log_target": false,
+          "best_params": {
+            "alpha": 1000
+          },
+          "n_param_combinations": 9,
+          "fit_seconds": 1.62,
+          "cv_rmsle_mean": 0.17551173491286048,
+          "cv_rmsle_std": 0.014642067565852691,
+          "train_rmsle_mean": 0.17417438964031315,
+          "cv_rmsle_folds": [
+            0.17626035098385026,
+            0.16424105184522403,
+            0.16340465869707196,
+            0.2032844600367538,
+            0.1703681530014024
+          ],
+          "cv_mae_mean": 24184.736450822347,
+          "cv_mae_std": 1391.6663372263101,
+          "train_mae_mean": 24070.94902071471,
+          "cv_mae_folds": [
+            24519.579612428857,
+            23033.684426128606,
+            22566.120783003968,
+            26555.954015309886,
+            24248.343417240427
+          ],
+          "cv_rmse_mean": 39729.67429184496,
+          "cv_rmse_std": 5333.108971030612,
+          "train_rmse_mean": 39659.901044785845,
+          "cv_rmse_folds": [
+            41147.15824439002,
+            33336.737439938035,
+            34004.58942599603,
+            47236.79309768564,
+            42923.09325121506
+          ],
+          "cv_r2_mean": 0.7340913351484459,
+          "cv_r2_std": 0.048924159017965485,
+          "train_r2_mean": 0.736086857185734,
+          "cv_r2_folds": [
+            0.724579290287882,
+            0.7975341780839866,
+            0.7669583820107841,
+            0.6519289140723964,
+            0.7294559112871801
+          ]
+        },
+        {
+          "config": "Ridge + log1p(y)",
+          "algorithm": "Ridge",
+          "log_target": true,
+          "best_params": {
+            "alpha": 3
+          },
+          "n_param_combinations": 9,
+          "fit_seconds": 1.53,
+          "cv_rmsle_mean": 0.14817078967573868,
+          "cv_rmsle_std": 0.026811922817612428,
+          "train_rmsle_mean": 0.13910865502459036,
+          "cv_rmsle_folds": [
+            0.1496878222037246,
+            0.1369089951998695,
+            0.13072677606121252,
+            0.1991239666109366,
+            0.1244063883029503
+          ],
+          "cv_mae_mean": 18574.630470616765,
+          "cv_mae_std": 2194.494754965127,
+          "train_mae_mean": 17340.090977082276,
+          "cv_mae_folds": [
+            18223.19636100759,
+            17129.038714741582,
+            18050.163353993845,
+            22809.14208773247,
+            16661.611835608328
+          ],
+          "cv_rmse_mean": 41491.12693542736,
+          "cv_rmse_std": 27130.226712042862,
+          "train_rmse_mean": 34544.58141803557,
+          "cv_rmse_folds": [
+            38970.8789227223,
+            23317.076697150136,
+            25507.457202581103,
+            94582.69276873271,
+            25077.529085950537
+          ],
+          "cv_r2_mean": 0.6069832509642967,
+          "cv_r2_std": 0.5043184880434225,
+          "train_r2_mean": 0.7985781226595045,
+          "cv_r2_folds": [
+            0.7529429218832975,
+            0.9009501700630691,
+            0.8688728116250328,
+            -0.39550207044526764,
+            0.9076524216953518
+          ]
+        },
+        {
+          "config": "RandomForestRegressor",
+          "algorithm": "RandomForestRegressor",
+          "log_target": false,
+          "best_params": {
+            "max_features": 0.33,
+            "min_samples_leaf": 1
+          },
+          "n_param_combinations": 6,
+          "fit_seconds": 17.52,
+          "cv_rmsle_mean": 0.14136806815229047,
+          "cv_rmsle_std": 0.00966193178714475,
+          "train_rmsle_mean": 0.05755622655922856,
+          "cv_rmsle_folds": [
+            0.15230079620108583,
+            0.140313053823539,
+            0.12535732265240118,
+            0.15039176544812488,
+            0.13847740263630134
+          ],
+          "cv_mae_mean": 17371.49009072755,
+          "cv_mae_std": 1014.4761673116961,
+          "train_mae_mean": 6449.492673433284,
+          "cv_mae_folds": [
+            17515.294245692578,
+            15752.854370506038,
+            16787.978241758243,
+            18248.554340554532,
+            18552.76925512637
+          ],
+          "cv_rmse_mean": 29164.763678253374,
+          "cv_rmse_std": 4067.0413879235175,
+          "train_rmse_mean": 10953.319475041817,
+          "cv_rmse_folds": [
+            34586.82618584907,
+            24723.909952706214,
+            24132.785313619246,
+            31361.92046913714,
+            31018.376469955187
+          ],
+          "cv_r2_mean": 0.8563899559295587,
+          "cv_r2_std": 0.029765161898529666,
+          "train_r2_mean": 0.9798737491577117,
+          "cv_r2_folds": [
+            0.8054020225067362,
+            0.8886372779023052,
+            0.8826256190633528,
+            0.8465692404338385,
+            0.8587156197415601
+          ]
+        },
+        {
+          "config": "RandomForestRegressor + log1p(y)",
+          "algorithm": "RandomForestRegressor",
+          "log_target": true,
+          "best_params": {
+            "max_features": 0.33,
+            "min_samples_leaf": 1
+          },
+          "n_param_combinations": 6,
+          "fit_seconds": 18.26,
+          "cv_rmsle_mean": 0.13776646438709603,
+          "cv_rmsle_std": 0.010633689623384323,
+          "train_rmsle_mean": 0.051594920656887464,
+          "cv_rmsle_folds": [
+            0.15160924486476776,
+            0.13730376206040631,
+            0.12131256775492681,
+            0.1463064163887496,
+            0.1323003308666296
+          ],
+          "cv_mae_mean": 17404.1081642813,
+          "cv_mae_std": 988.4704019966424,
+          "train_mae_mean": 6523.78070553223,
+          "cv_mae_folds": [
+            17990.293460501707,
+            15821.85523608301,
+            16726.687923675967,
+            18540.06117095397,
+            17941.643030191863
+          ],
+          "cv_rmse_mean": 29783.44405388216,
+          "cv_rmse_std": 4178.721360427782,
+          "train_rmse_mean": 11264.423648554755,
+          "cv_rmse_folds": [
+            35023.65809932074,
+            25704.085220374975,
+            24078.844747092608,
+            31641.618835699563,
+            32469.013366922918
+          ],
+          "cv_r2_mean": 0.8504499065517056,
+          "cv_r2_std": 0.029973122035151824,
+          "train_r2_mean": 0.978698144905799,
+          "cv_r2_folds": [
+            0.8004554325249945,
+            0.8796323347749518,
+            0.8831497330321754,
+            0.8438203209846231,
+            0.8451917114417833
+          ]
+        },
+        {
+          "config": "HistGradientBoostingRegressor",
+          "algorithm": "HistGradientBoostingRegressor",
+          "log_target": false,
+          "best_params": {
+            "learning_rate": 0.03,
+            "max_leaf_nodes": 7
+          },
+          "n_param_combinations": 6,
+          "fit_seconds": 83.76,
+          "cv_rmsle_mean": 0.1380562175291883,
+          "cv_rmsle_std": 0.0070310268251677676,
+          "train_rmsle_mean": 0.10049612283843161,
+          "cv_rmsle_folds": [
+            0.1396720214915327,
+            0.14024729774801584,
+            0.1307015455170816,
+            0.14930060341864385,
+            0.13035961947066751
+          ],
+          "cv_mae_mean": 17324.603207656746,
+          "cv_mae_std": 546.8748889815599,
+          "train_mae_mean": 12075.913599020572,
+          "cv_mae_folds": [
+            16959.40781240856,
+            17180.41957595256,
+            16661.728759449594,
+            18238.382570384965,
+            17583.077320088058
+          ],
+          "cv_rmse_mean": 28580.548559687137,
+          "cv_rmse_std": 3046.256323171335,
+          "train_rmse_mean": 18452.24371095835,
+          "cv_rmse_folds": [
+            30054.88949936513,
+            26003.246226568386,
+            24062.598241811622,
+            32219.56343605506,
+            30562.445394635477
+          ],
+          "cv_r2_mean": 0.8628161023561158,
+          "cv_r2_std": 0.01627138600329887,
+          "train_r2_mean": 0.9428862627636494,
+          "cv_r2_folds": [
+            0.8530575858849525,
+            0.8768141942709519,
+            0.8833073625240513,
+            0.8380628693056171,
+            0.8628384997950065
+          ]
+        },
+        {
+          "config": "HistGradientBoostingRegressor + log1p(y)",
+          "algorithm": "HistGradientBoostingRegressor",
+          "log_target": true,
+          "best_params": {
+            "learning_rate": 0.03,
+            "max_leaf_nodes": 7
+          },
+          "n_param_combinations": 6,
+          "fit_seconds": 62.18,
+          "cv_rmsle_mean": 0.1371518373233785,
+          "cv_rmsle_std": 0.0073138972367770404,
+          "train_rmsle_mean": 0.09390497916880138,
+          "cv_rmsle_folds": [
+            0.13988975518483177,
+            0.13880571027814262,
+            0.13101505156099963,
+            0.14846587038299316,
+            0.12758279920992532
+          ],
+          "cv_mae_mean": 17202.56167215232,
+          "cv_mae_std": 620.4883351943231,
+          "train_mae_mean": 11955.516563711983,
+          "cv_mae_folds": [
+            17051.503108954723,
+            16327.442781320495,
+            16938.465241482005,
+            18189.91699104939,
+            17505.480237954962
+          ],
+          "cv_rmse_mean": 28704.44055441281,
+          "cv_rmse_std": 3329.0210849838013,
+          "train_rmse_mean": 19209.258384650173,
+          "cv_rmse_folds": [
+            29637.938366587146,
+            24755.318038421457,
+            24921.684479445245,
+            32977.32596505442,
+            31229.93592255577
+          ],
+          "cv_r2_mean": 0.8614849568761855,
+          "cv_r2_std": 0.019546029060734812,
+          "train_r2_mean": 0.9381121707096108,
+          "cv_r2_folds": [
+            0.8571063661833604,
+            0.8883541583166299,
+            0.8748262674697488,
+            0.8303561926450568,
+            0.8567817997661313
+          ]
+        }
+      ],
+      "selected": "HistGradientBoostingRegressor + log1p(y)",
+      "baseline": "DummyRegressor",
+      "selected_beats_baseline_cv": {
+        "rmsle": true,
+        "mae": true,
+        "rmse": true,
+        "r2": true
+      }
+    }
+  },
+  "app_artifact": "artifacts/models/house_price_pipeline.joblib (conjunto 'app', usado pela API)",
+  "full_artifact": "artifacts/models/house_price_pipeline_full.joblib (conjunto 'full', referência e submissão Kaggle)"
+}
