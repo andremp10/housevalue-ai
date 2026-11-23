@@ -13,3 +13,5 @@ data_description.txt
 artifacts/reports/ui_screenshots/
 .vercel
 node_modules/
+
+.vercel
